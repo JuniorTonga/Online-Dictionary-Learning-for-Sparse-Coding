@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 from sklearn.utils import shuffle
 from tqdm import tqdm 
-from PIL import Image
 import matplotlib.pyplot as plt
 from random import randint
 from .utils import insert_text_on_image
