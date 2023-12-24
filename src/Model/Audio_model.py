@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import Audio, display
 import time
+import random
 
 
 class DictionaryLearner:
@@ -28,25 +29,19 @@ class DictionaryLearner:
         # Fit the model
         self.model.fit(data_flattened)
 
-        # End timing
-        end_time = time.time()
-
-        # Calculate and print the training time
-        training_time = end_time - start_time
-        print(f"Training Time: {training_time} seconds")
-
         return self.model.components_
 
 
 
 class DictionaryVisualizer:
-    def __init__(self, dictionary, sample_rate):
+    def __init__(self, dictionary, sample_rate, number_dic):
         """
         dictionary: The learned dictionary (atoms).
         sample_rate: Sampling rate of the audio data.
         """
         self.dictionary = dictionary
         self.sample_rate = sample_rate
+        self.number_dic = number_dic
 
     def visualize_atom(self, atom_index):
         plt.figure(figsize=(12, 4))
@@ -64,5 +59,5 @@ class DictionaryVisualizer:
         self.play_atom(atom_index)
 
     def show_all_atoms(self):
-        for i in range(len(self.dictionary)):
+        for i in random.sample(range(len(self.dictionary)), self.number_dic):
             self.show_atom(i)
