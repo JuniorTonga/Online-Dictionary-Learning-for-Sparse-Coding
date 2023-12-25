@@ -3,6 +3,7 @@ import random
 import librosa
 import numpy as np
 import librosa.effects
+import shutil
 
 class AudioPreprocessor:
     def __init__(self, directory, num_samples, target_duration=5, sample_rate=22050):
@@ -50,3 +51,31 @@ class AudioPreprocessor:
     def preprocess_all(self):
         selected_files = self.select_audio_files()
         return [self.preprocess_audio(audio_path) for audio_path in selected_files]
+
+
+class AudioSplitter:
+    def __init__(self, base_path, train_ratio=0.8):
+        self.base_path = base_path
+        self.train_ratio = train_ratio
+        self.train_path = os.path.join(base_path, 'train_set')
+        self.test_path = os.path.join(base_path, 'test_set')
+
+    def split(self):
+        # Create directories for train and test sets
+        os.makedirs(self.train_path, exist_ok=True)
+        os.makedirs(self.test_path, exist_ok=True)
+
+        # Get a list of all audio files
+        all_files = [f for f in os.listdir(self.base_path) if f.endswith('.mp3')]  # Adjust the extension if needed
+        random.shuffle(all_files)
+
+        # Calculate the number of files for the training set
+        train_size = int(len(all_files) * self.train_ratio)
+
+        # Separate and move the files
+        for i, file in enumerate(all_files):
+            if i < train_size:
+                shutil.move(os.path.join(self.base_path, file), self.train_path)
+            else:
+                shutil.move(os.path.join(self.base_path, file), self.test_path)
+
