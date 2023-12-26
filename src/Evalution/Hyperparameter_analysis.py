@@ -275,7 +275,7 @@ def calculate_average_dtw_error(true_data, reconstructed_data):
     total_dtw_distance = 0
 
     for i in range(n_series):
-        distance = dtw.distance(true_data[i], reconstructed_data[i])
+        distance = dtw.distance(true_data[i,:], reconstructed_data[i,:], window = 4)
         total_dtw_distance += distance
 
     average_dtw_distance = total_dtw_distance / n_series
@@ -299,6 +299,23 @@ def evaluate_reconstruction(train_data, test_data, n_components, batch_size, alp
     reconstruction_error = calculate_average_dtw_error(test_data, reconstructed_test)
 
     return reconstruction_error
+
+
+
+def grid_search(train_data, test_data, n_components, batch_sizes, alphas):
+    best_error = float('inf')
+    best_params = None
+
+    for batch_size in batch_sizes:
+        for alpha in alphas:
+            error = evaluate_reconstruction(train_data, test_data, n_components, batch_size, alpha)
+            if error < best_error:
+                best_error = error
+                best_params = {'n_components': n_components, 'batch_size': batch_size, 'alpha': alpha}
+    
+    return best_params, best_error
+
+
 
 
 
