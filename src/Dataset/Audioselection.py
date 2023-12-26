@@ -19,9 +19,9 @@ class AudioPreprocessor:
         self.sample_rate = sample_rate
 
     def select_audio_files(self):
-        # Get all files in the directory
+        
         all_files = [os.path.join(self.directory, f) for f in os.listdir(self.directory) if f.endswith('.mp3')]
-        # Randomly select a specified number of audio files
+       
         return random.sample(all_files, min(self.num_samples, len(all_files)))
 
     def preprocess_audio(self, audio_path):

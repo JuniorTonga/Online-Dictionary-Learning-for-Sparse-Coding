@@ -316,6 +316,35 @@ def grid_search(train_data, test_data, n_components, batch_sizes, alphas):
     return best_params, best_error
 
 
+def plot_dictionary_distance(train_data, n_components, batch_size, alpha):
+    clf = MiniBatchDictionaryLearning(n_components=n_components,
+                                      batch_size=batch_size,
+                                      alpha=alpha,
+                                      transform_algorithm='lasso_lars')
+
+    # Store dictionaries at each step
+    dictionaries = []
+
+    for i, batch in enumerate(np.array_split(train_data, len(train_data) // batch_size)):
+        clf.partial_fit(batch)
+        dictionaries.append(clf.components_.copy())
+
+    # Calculate DTW distance between consecutive dictionaries
+    dtw_distances = []
+    for i in range(1, len(dictionaries)):
+        distances = [dtw.distance(dictionaries[i-1][k], dictionaries[i][k], window=4) 
+                     for k in range(n_components)]
+        dtw_distances.append(np.mean(distances))
+
+    # Plot DTW distances
+    plt.plot(dtw_distances)
+    plt.xlabel('Iterations')
+    plt.ylabel('Average DTW Distance')
+    plt.title('DTW Distance Between Consecutive Dictionaries')
+    plt.show()
+
+
+
 
 
 
