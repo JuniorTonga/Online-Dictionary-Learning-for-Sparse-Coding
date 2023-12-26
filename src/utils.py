@@ -95,7 +95,7 @@ def plot_reconstruction_error(
     ax.set_title("Reconstruction error through time")
     ax.legend()
 
-def plot_reconstruction_error_and_dictionary_distances(
+def plot_reconstruction_error_(
         times, reconstruction_errors, label_name="Test image", label_values=[]):
     _, ax0 = plt.subplots(ncols=1, figsize=(15, 5))
 
