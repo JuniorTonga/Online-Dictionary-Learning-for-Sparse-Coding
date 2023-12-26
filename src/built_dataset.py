@@ -1,5 +1,3 @@
-#https://www.kaggle.com/datasets/puneet6060/intel-image-classification?resource=download&select=seg_test
-
 import os
 import cv2
 import numpy as np

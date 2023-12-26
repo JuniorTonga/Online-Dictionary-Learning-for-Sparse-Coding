@@ -2,7 +2,7 @@ from tqdm import tqdm
 from sklearn.decomposition import MiniBatchDictionaryLearning
 import numpy as np
 import time
-from .utils import plot_reconstruction_error_and_dictionary_distances
+from .utils import plot_reconstruction_error_
 
 
 def loader(X, batch_size):
@@ -62,6 +62,6 @@ def eval_impact_parameters_on_reconstruction(
     reconstruction_errors = np.array(reconstruction_errors)
     times = np.array(times)
 
-    # We eventually plot the reconstruction error
-    plot_reconstruction_error_and_dictionary_distances(
+    # We plot the reconstruction error
+    plot_reconstruction_error_(
         times, reconstruction_errors,label_name=label_name, label_values=label_values)
