@@ -24,3 +24,30 @@ class TimeSeriesPlotter:
         plt.legend()
         plt.show()
 
+
+def plot_signals_and_reconstructions(signals, reconstructions, titles, title):
+    """
+    Plot original signals and their reconstructions in a 2x2 subplot.
+
+    :param signals: List of 4 original signals.
+    :param reconstructions: List of 4 reconstructed signals.
+    :param titles: List of 4 titles for the subplots.
+    """
+    fig, axs = plt.subplots(2, 2, figsize=(12, 8))
+    axs = axs.ravel()  
+
+    for i in range(4):
+        axs[i].plot(signals[i], label='Original Signal')
+        axs[i].plot(reconstructions[i], label='Reconstructed Signal', linestyle='--')
+        axs[i].set_title(titles[i])
+        axs[i].legend()
+        axs[i].set_xlabel('Time')
+        axs[i].set_ylabel('Amplitude')
+
+    plt.tight_layout()
+    plt.suptitle(title, fontsize=16) 
+    plt.title(title)
+    plt.show()
+
+
+
