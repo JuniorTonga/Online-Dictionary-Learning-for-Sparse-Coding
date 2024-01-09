@@ -7,5 +7,5 @@ Experiment have been done on both image and audio parts.
 - The data for images experiments was taken here : https://www.kaggle.com/datasets/puneet6060/intel-image-classification?resource=download&select=seg_test
 
 - In the experiments Folder you will find the notebook of the image experiment and also signal experiments
-- in the src folder you will find the source code for the experiment
-- in the Dataset, you will find the data used in signal experiments
+- In the src folder you will find the source code for the experiment
+- In the Dataset folder, you will find the data used in signal experiments
