@@ -4,7 +4,7 @@ The paper introduces an online optimization procedure for the problem of diction
 
 Experiment have been done on both image and audio parts. 
 
-- The data for images experiments was taken here : https://www.kaggle.com/datasets/puneet6060/intel-image-classification?resource=download&select=seg_test
+- The data for images experiments was taken here : https://www.kaggle.com/datasets/puneet6060/intel-image-classification?resource=download&select=seg_test (Also available in the image_dataset folder)
 
 - In the experiments Folder you will find the notebook of the image experiment and also signal experiments
 - In the src folder you will find the source code for the experiment
